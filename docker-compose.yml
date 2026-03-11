@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Base de Datos PostgreSQL
+  smartbiz-db:
+    image: postgres:15-alpine
+    container_name: smartbiz_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: smartbiz_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # (Opcional) Interfaz visual para la BD
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: smartbiz_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@smartbiz.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
+    depends_on:
+      - smartbiz-db
+
+volumes:
+  postgres_data:

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:sts="dian:gov:co:facturaelectronica:Structures-2-1">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="SIG-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9">
+        <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"> <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/> <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/> <ds:Reference Id="REF-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9" URI=""> <ds:Transforms> <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/> </ds:Transforms> <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/> <ds:DigestValue>//21fWX/dTUe3sRWGjLOFAhxmLwxExlNWZ7WoBqGUuY=</ds:DigestValue> </ds:Reference> <ds:Reference URI="#KI-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9"> <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/> <ds:DigestValue>dcuI4FfgOneSKnlTo27eTRxdeZiaIMsVvD7uTIdYxaM=</ds:DigestValue> </ds:Reference> <ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#SP-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9"> <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/> <ds:DigestValue>mwbF5iluib4MaBU+nOMqo+ieqRQQE0GRBa06IDkZKYE=</ds:DigestValue> </ds:Reference> </ds:SignedInfo>
+        <ds:SignatureValue>KU7WqlWqjkSFvc1dCENe9bT8eXyUTG3dU3l5PcNApgjmVIppEaUwT9j3sLcK0lPWi8NOUlZhK5g9dPQfM8vEBgTTF+talNBTEti3UpP4l9B+NVkoYmuHkqQNJ8T2gk2/KXtkZpo1NEJpvL0jAk4I9pX0tssWwjAtNyLkbz8RHDhlIWDgBO4gSYdwe+BhpKJ/yufjJXe1DyK9/8f6PH0zNrEWhlQPrOIsW0+NNFpwUVuILjASJsWRJs8T0KWfP3INOxb0TuUyvGTcHpT8ZsU/s6dsS3ktwXHjm+03lUFkX/UO2XmUIAdPRzYz/gTmDFccz3/ocyhwoUK7aGkqHJtYPw==</ds:SignatureValue>
+        <ds:KeyInfo Id="KI-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9">
+            <ds:X509Data>
+                <ds:X509Certificate>MIIDUzCCAjugAwIBAgIBATANBgkqhkiG9w0BAQsFADBtMRYwFAYDVQQDEw1TbWFy
+dEJpeiBUZXN0MQswCQYDVQQGEwJDTzEPMA0GA1UECBMGQm9nb3RhMQ8wDQYDVQQH
+EwZCb2dvdGExFTATBgNVBAoTDFNtYXJ0Qml6IEluYzENMAsGA1UECxMEVGVzdDAe
+Fw0yNjAyMTYxNzA3MjZaFw0yNzAyMTYxNzA3MjZaMG0xFjAUBgNVBAMTDVNtYXJ0
+Qml6IFRlc3QxCzAJBgNVBAYTAkNPMQ8wDQYDVQQIEwZCb2dvdGExDzANBgNVBAcT
+BkJvZ290YTEVMBMGA1UEChMMU21hcnRCaXogSW5jMQ0wCwYDVQQLEwRUZXN0MIIB
+IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtCenJUwI29DBxkNjybSPAVRF
+OL/ldGQEMd/RBo3sVWXMwJzXK8AefMOy7m1yPRFFVHF7Wg8o48Ua3h91Bnsujz9U
++16vhdleoTdNgGE/0paWb2ALhUxlwjSEQe6m3aAudeQfqonoMCmUs8AH8voKP07G
+isPErapMYzfZMoFEAlUQz/U82JayHvAi+Chu/g2qoAJxyMWEIYj7VMpJIKjf9IMZ
+OtyDXPE4ldU5ehYFFLt9YMXxRj7FXCDntfkc0NNz2z+faYo6z7mamJaKKXMhAqSN
+AIGr9GNFUfeCa0LAZoztLFA2ftr0GSSE+01ipPGWJqOxu4ztqMrrEdxUi/V41QID
+AQABMA0GCSqGSIb3DQEBCwUAA4IBAQArdhfuGMQ3Shh2KRgucJJRphTbKiAp1lrr
+9ZuGFbv7a2wmpoBFtq9kR/4L54AOo9Dw7/XUSLlC5OlWgCpO3Osdjnh8Y5jcJpR0
+yNsEHGKEIDwzHbNcYyDhGfVvz86jmA8RxHsKCrZnmw1y9sBLzPgZrNYmYJXLCrL2
+YbINRkh4sG1C579syBb8C0vjBRUlrwn4RX8X+TRIkgZG/7q7RMZKoVzv+zgqUYgF
+ySs9ALi4R+IMqtwfFEUHtYqoD0ehJDMCA4JKXlR2RnoQr2Eulx5//jzi3AcH74Kq
+TyXfoLkaFEVTJ8vHfEvLbRbQeDjy2PkKwAPUcNLVfYJK/SGIfIZ3
+</ds:X509Certificate>
+            </ds:X509Data>
+        </ds:KeyInfo>
+        <ds:Object>
+            <etsi:QualifyingProperties Target="#SIG-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#">
+                <etsi:SignedProperties Id="SP-80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#"> <etsi:SignedSignatureProperties> <etsi:SigningTime>2026-02-16T22:32:41.000Z</etsi:SigningTime> <etsi:SigningCertificate> <etsi:Cert> <etsi:CertDigest> <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/> <ds:DigestValue xmlns:ds="http://www.w3.org/2000/09/xmldsig#">VaqGYxd6iw17Mxo/wfmueqgoOJsovGCWuIKdX8cv6Jg=</ds:DigestValue> </etsi:CertDigest> <etsi:IssuerSerial> <ds:X509IssuerName xmlns:ds="http://www.w3.org/2000/09/xmldsig#">OU=Test, O=SmartBiz Inc, L=Bogota, ST=Bogota, C=CO, CN=SmartBiz Test</ds:X509IssuerName> <ds:X509SerialNumber xmlns:ds="http://www.w3.org/2000/09/xmldsig#">1</ds:X509SerialNumber> </etsi:IssuerSerial> </etsi:Cert> </etsi:SigningCertificate> </etsi:SignedSignatureProperties> </etsi:SignedProperties>
+            </etsi:QualifyingProperties>
+        </ds:Object>
+    </ds:Signature></ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>UBL 2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>10</cbc:CustomizationID>
+  <cbc:ProfileID>DIAN 2.1: Factura Electrónica de Venta</cbc:ProfileID>
+  <cbc:ID>FE6</cbc:ID>
+  <cbc:UUID schemeName="CUFE-SHA384">80de1534cb6b0de9c4a96c77934642f83fb8a1ba0e4b58ab4d1631e530cbe9040bc6f7365e34476c0a56c791a84eaaf9</cbc:UUID>
+  <cbc:IssueDate>2026-02-16</cbc:IssueDate>
+  <cbc:IssueTime>17:32:41-05:00</cbc:IssueTime>
+  <cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyTaxScheme>
+        <cbc:RegistrationName>Sebas juve</cbc:RegistrationName>
+        <cbc:CompanyID schemeName="31">55666777</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>01</cbc:ID>
+          <cbc:Name>IVA</cbc:Name>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyTaxScheme>
+        <cbc:RegistrationName>prueba</cbc:RegistrationName>
+        <cbc:CompanyID schemeName="13">000000000</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>01</cbc:ID>
+          <cbc:Name>IVA</cbc:Name>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="94">12</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="COP">60000.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Description>prueba</cbc:Description>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="COP">5000.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="COP">60000.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="COP">11400.00</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="COP">71400.00</cbc:TaxInclusiveAmount>
+    <cbc:PayableAmount currencyID="COP">71400.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+</Invoice>

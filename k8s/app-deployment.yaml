@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartbiz-backend
+spec:
+  replicas: 2 # Alta disponibilidad (2 instancias)
+  selector:
+    matchLabels:
+      app: smartbiz-backend
+  template:
+    metadata:
+      labels:
+        app: smartbiz-backend
+    spec:
+      containers:
+      - name: smartbiz-backend
+        image: tu-usuario-docker/smartbiz-backend:latest # Aquí irá tu imagen
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: smartbiz-secrets
+        # IMPORTANTE: Montaje del certificado digital para la DIAN
+        volumeMounts:
+        - name: dian-certificates
+          mountPath: "/usr/src/app/certificates"
+          readOnly: true
+      volumes:
+      - name: dian-certificates
+        secret:
+          secretName: dian-p12-cert # Debes crear este secreto con el archivo .p12 real
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartbiz-service
+spec:
+  type: LoadBalancer # O ClusterIP si usas Ingress
+  selector:
+    app: smartbiz-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

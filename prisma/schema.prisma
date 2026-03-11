@@ -1,0 +1,99 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Company {
+  id             String   @id @default(uuid())
+  nit            String   @unique
+  businessName   String
+  address        String?
+  phone          String?
+  email          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  // Certificado
+  certificatePath String? 
+  certificatePass String?
+  
+  // --- CAMPOS QUE FALTAN (Asegúrate que estén aquí) ---
+  technicalKey    String?  @default("fc8eac422eba16e22ffd8c6f94b3f40a6e38162c")
+  testSetId       String?
+  softwareId      String?
+  pin             String?  @default("12345")
+  environment     String   @default("2")
+  planType          String   @default("FREE") // FREE, STARTER, PRO
+  planStatus        String   @default("ACTIVE") // ACTIVE, PAST_DUE
+  currentCycleStart DateTime @default(now()) // Cuándo empezó su mes
+  invoiceCount      Int      @default(0) // Cuántas lleva este mes
+  plan         String    @default("FREE")
+  // ----------------------------------------------------
+
+  invoices        Invoice[]
+  users           User[]
+  dianLogs DianLog[]
+}
+
+model DianLog {
+  id         String   @id @default(uuid())
+  companyId  String
+  company    Company  @relation(fields: [companyId], references: [id])
+  operation  String
+  statusCode String
+  response   String
+  createdAt  DateTime @default(now())
+}
+
+model Invoice {
+  id              String        @id @default(uuid())
+  number          Int           @default(autoincrement()) // Consecutivo (Ej: 1, 2, 3...)
+  prefix          String        @default("FE") // Prefijo de facturación
+  date            DateTime      @default(now())
+  
+  // Datos del Cliente (Snapshot del momento de la venta)
+  customerName    String
+  customerNit     String
+  customerEmail   String
+  
+  // Totales
+  subtotal        Decimal       @db.Decimal(10, 2)
+  tax             Decimal       @db.Decimal(10, 2) // IVA
+  total           Decimal       @db.Decimal(10, 2)
+  
+  // Estado DIAN
+  dianStatus      String        @default("DRAFT") // DRAFT, SIGNED, SENT, REJECTED
+  cufe            String?       // Código Único de Facturación Electrónica
+  xmlPath         String?       // Ruta del archivo XML generado
+
+  // Relaciones
+  companyId       String
+  company         Company       @relation(fields: [companyId], references: [id])
+  items           InvoiceItem[]
+}
+
+model InvoiceItem {
+  id              String   @id @default(uuid())
+  description     String
+  quantity        Int
+  unitPrice       Decimal  @db.Decimal(10, 2)
+  totalPrice      Decimal  @db.Decimal(10, 2)
+  
+  invoiceId       String
+  invoice         Invoice  @relation(fields: [invoiceId], references: [id])
+}
