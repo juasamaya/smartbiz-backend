@@ -10,10 +10,12 @@ RUN npm install -g @nestjs/cli
 
 COPY . .
 
-RUN rm -rf dist
-
 RUN npx prisma generate
+
+# 1. Compilamos el proyecto de TypeScript a JavaScript puro
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:dev"]
+# 2. Ejecutamos las migraciones y levantamos el archivo compilado (dist/main)
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
