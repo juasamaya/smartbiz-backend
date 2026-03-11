@@ -18,4 +18,4 @@ RUN npm run build
 EXPOSE 3000
 
 # 2. Ejecutamos las migraciones y levantamos el archivo compilado (dist/main)
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
