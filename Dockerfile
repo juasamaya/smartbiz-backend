@@ -4,18 +4,18 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci
-
-RUN npm install -g @nestjs/cli
+# 1. Usamos npm install para garantizar que se instalen las herramientas de compilación (TypeScript)
+RUN npm install
 
 COPY . .
 
+# 2. Generamos Prisma
 RUN npx prisma generate
 
-# 1. Compilamos el proyecto de TypeScript a JavaScript puro
+# 3. Ahora la compilación sí funcionará y creará la carpeta dist/
 RUN npm run build
 
 EXPOSE 3000
 
-# 2. Ejecutamos las migraciones y levantamos el archivo compilado (dist/main)
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
+# 4. Usamos el script nativo de NestJS para producción
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
