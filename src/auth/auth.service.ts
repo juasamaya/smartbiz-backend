@@ -25,8 +25,6 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { username: user.email, sub: user.id };
-    
     const fullUser = await this.prisma.user.findUnique({
       where: { id: user.id },
       include: { company: true }
@@ -35,6 +33,13 @@ export class AuthService {
     if (!fullUser || !fullUser.company) {
       throw new InternalServerErrorException('Error recuperando datos del usuario');
     }
+
+    // AHORA SÍ: Guardamos el email real, el ID y el ID de la empresa en el token
+    const payload = { 
+      email: fullUser.email, 
+      sub: fullUser.id, 
+      companyId: fullUser.company.id 
+    };
 
     return {
       access_token: this.jwtService.sign(payload),
