@@ -4,16 +4,21 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci
+# 1. Instalamos TODAS las dependencias (incluyendo NestJS y TypeScript)
+RUN npm install --include=dev
 
-RUN npm install -g @nestjs/cli
+# 2. Instalamos el compilador globalmente para evitar fallos ocultos
+RUN npm install -g @nestjs/cli typescript
 
+# 3. Copiamos el código fuente
 COPY . .
 
-RUN rm -rf dist
-
+# 4. Generamos Prisma
 RUN npx prisma generate
+
+# 5. Forzamos la compilación nativa
+RUN nest build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/src/main.js"]
