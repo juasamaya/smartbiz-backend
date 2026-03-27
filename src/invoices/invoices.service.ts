@@ -7,6 +7,7 @@ import {
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { PaginationDto } from '../common/dtos/pagination.dto';
+import PDFDocument from 'pdfkit';
 
 @Injectable()
 export class InvoicesService {
@@ -126,8 +127,52 @@ export class InvoicesService {
     return invoice;
   }
 
-  async generatePdf(id: string, userId: string): Promise<Buffer> {
+async generatePdf(id: string, userId: string): Promise<Buffer> {
     const invoice = await this.findOne(id, userId);
-    return Buffer.from(`Factura ${invoice.prefix}${invoice.number}`);
+
+    return new Promise((resolve, reject) => {
+      // 1. Inicializamos el documento PDF
+      const doc = new PDFDocument({ margin: 50 });
+      const buffers: Buffer[] = [];
+
+      // 2. Capturamos los datos a medida que se genera
+      doc.on('data', (chunk) => buffers.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(buffers)));
+      doc.on('error', reject);
+
+      // 3. ¡Dibujamos la factura! (Puedes cambiar el diseño luego, este es perfecto para el MVP)
+      doc.fontSize(20).text('SmartBiz - Factura de Venta', { align: 'center' });
+      doc.moveDown();
+      
+      doc.fontSize(12).text(`Factura No: ${invoice.prefix}${invoice.number}`);
+      doc.text(`Fecha: ${new Date(invoice.date).toLocaleDateString()}`);
+      doc.moveDown();
+      
+      doc.fontSize(14).text('Datos del Cliente');
+      doc.fontSize(12).text(`Nombre: ${invoice.customerName}`);
+      doc.text(`NIT/CC: ${invoice.customerNit}`);
+      doc.text(`Email: ${invoice.customerEmail}`);
+      doc.moveDown();
+
+      doc.text('---------------------------------------------------------');
+      doc.fontSize(14).text('Detalle de Productos');
+      doc.fontSize(12).moveDown();
+
+      // Listamos los items de la factura
+      invoice.items.forEach(item => {
+        doc.text(`${item.quantity}x ${item.description} - $${Number(item.totalPrice).toLocaleString('es-CO')}`);
+      });
+
+      doc.moveDown();
+      doc.text('---------------------------------------------------------');
+      
+      // Totales
+      doc.fontSize(14).text(`Subtotal: $${Number(invoice.subtotal).toLocaleString('es-CO')}`, { align: 'right' });
+      doc.text(`IVA (19%): $${Number(invoice.tax).toLocaleString('es-CO')}`, { align: 'right' });
+      doc.fontSize(16).text(`TOTAL: $${Number(invoice.total).toLocaleString('es-CO')}`, { align: 'right' });
+
+      // 4. Cerramos el documento
+      doc.end();
+    });
   }
 }
