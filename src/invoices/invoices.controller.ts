@@ -22,17 +22,20 @@ export class InvoicesController {
 
   @Post()
   create(@Request() req, @Body() createInvoiceDto: CreateInvoiceDto) {
-    return this.invoicesService.create(req.user.userId, createInvoiceDto);
+    // CORREGIDO: req.user.id
+    return this.invoicesService.create(req.user.id, createInvoiceDto);
   }
 
   @Get()
   findAll(@Request() req, @Query() paginationDto: PaginationDto) {
-    return this.invoicesService.findAll(req.user.userId, paginationDto);
+    // CORREGIDO: req.user.id
+    return this.invoicesService.findAll(req.user.id, paginationDto);
   }
 
   @Get(':id')
   findOne(@Request() req, @Param('id') id: string) {
-    return this.invoicesService.findOne(id, req.user.userId);
+    // CORREGIDO: req.user.id
+    return this.invoicesService.findOne(id, req.user.id);
   }
 
   @Get(':id/pdf')
@@ -41,7 +44,8 @@ export class InvoicesController {
     @Param('id') id: string, 
     @Res() res: Response
   ) {
-    const pdfBuffer = await this.invoicesService.generatePdf(id, req.user.userId);
+    // CORREGIDO: req.user.id
+    const pdfBuffer = await this.invoicesService.generatePdf(id, req.user.id);
     
     res.set({
       'Content-Type': 'application/pdf',
